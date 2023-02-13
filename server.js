@@ -19,7 +19,7 @@ app.use("/volunteer-slots", volunteerSlots);
 // Route to all user endpoints
 app.use("/users", users);
 
-// Seed data:
+// // Seed data:
 // const seed = require("./models/SeedData");
 // const VolunteerSlots = require("./models/VolunteerSlots");
 
@@ -44,5 +44,5 @@ app.use("/users", users);
 // });
 
 app.listen(process.env.PORT, () => {
-  console.log("server started on Port 5001");
+  console.log(`server started on Port ${process.env.PORT}`);
 });
