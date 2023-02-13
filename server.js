@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db/db");
-// const volunteerSlots = require("./routers/volunteerSlots");
+const volunteerSlots = require("./routers/volunteerSlots");
 const users = require("./routers/users");
 
 const app = express();
@@ -14,12 +14,12 @@ app.use(express.urlencoded({ extended: false }));
 connectDB(process.env.MONGODB_URI);
 
 // Route to all volunteer endpoints
-// app.use("/volunteer-slots", volunteerSlots);
+app.use("/volunteer-slots", volunteerSlots);
 
 // Route to all user endpoints
 app.use("/users", users);
 
-// Seed data
+// Seed data:
 // const seed = require("./models/SeedData");
 // const VolunteerSlots = require("./models/VolunteerSlots");
 
