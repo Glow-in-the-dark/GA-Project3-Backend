@@ -16,7 +16,6 @@ async function createNewUserOrSignIn(req, res) {
     if (user) {
       // Check if password matches
       const result = await bcrypt.compare(req.body.password, user.hash);
-
       // If password dont match, return error
       if (!result) {
         return res.status(400).json({
@@ -47,7 +46,7 @@ async function createNewUserOrSignIn(req, res) {
 
       const response = { access, refresh };
 
-      res.json(response);
+      return res.json(response);
     }
 
     // If user does not have account, create new account
@@ -65,10 +64,12 @@ async function createNewUserOrSignIn(req, res) {
 
     await newUser.save();
     console.log("created user is: ", newUser);
-    res.json({ status: "okay", message: "user created" });
+    return res.json({ status: "okay", message: "user created" });
   } catch (error) {
     console.log("PUT /users/create", error);
-    res.status(400).json({ status: "error", message: "an error has occured" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "an error has occured" });
   }
 }
 
@@ -100,10 +101,12 @@ async function createNewUser(req, res) {
 
     await newUser.save();
     console.log("created user is: ", newUser);
-    res.json({ status: "okay", message: "user created" });
+    return res.json({ status: "okay", message: "user created" });
   } catch (error) {
     console.log("PUT /users/create", error);
-    res.status(400).json({ status: "error", message: "an error has occured" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "an error has occured" });
   }
 }
 
@@ -151,10 +154,10 @@ async function login(req, res) {
 
     const response = { access, refresh };
 
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     console.log("POST /users/login", error);
-    res.status(400).json({ status: "error", message: "login failed" });
+    return res.status(400).json({ status: "error", message: "login failed" });
   }
 }
 
@@ -174,10 +177,10 @@ async function getRefreshToken(req, res) {
     });
 
     const response = { access };
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     console.log("POST /users/refresh", error);
-    res.status(401).json({ status: "error", message: "unauthorised" });
+    return res.status(401).json({ status: "error", message: "unauthorised" });
   }
 }
 

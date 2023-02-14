@@ -44,10 +44,10 @@ async function getAvailabilityDetails(req, res) {
       response.push(newItem);
     });
 
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     console.error("GET /volunteer-slots/vacancies", error);
-    res
+    return res
       .status(400)
       .json({ status: "error", message: "request to get slot details failed" });
   }
@@ -67,13 +67,14 @@ async function createNewSignUp(req, res) {
         $elemMatch: { timing: req.body.timing, email: req.body.email },
       },
     });
-
+    console.log(1);
     if (clashingSignUp) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "clashing sign up" });
+      return res.status(400).json({
+        status: "error",
+        message: "clashing sign up",
+      });
     }
-
+    console.log(2);
     // Create new record
     const newSignUp = {
       role: req.body.role,
@@ -88,10 +89,10 @@ async function createNewSignUp(req, res) {
       { $push: { sign_ups: newSignUp } }
     );
 
-    res.json({ status: "ok", message: "successfully created" });
+    return res.json({ status: "ok", message: "successfully created" });
   } catch (error) {
     console.error("PATCH /volunteer-slots/new-sign-up", error);
-    res.status(400).json({ status: "error", message: "request failed" });
+    return res.status(400).json({ status: "error", message: "request failed" });
   }
 }
 
