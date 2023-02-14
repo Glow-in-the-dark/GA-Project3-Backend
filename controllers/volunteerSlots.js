@@ -62,7 +62,7 @@ async function createNewSignUp(req, res) {
 
     // Check if volunteer has signed up for this date and timing
     const clashingSignUp = await VolunteerSlots.findOne({
-      date: req.body.date,
+      date: modified_date,
       sign_ups: {
         $elemMatch: { timing: req.body.timing, email: req.body.email },
       },
@@ -84,7 +84,7 @@ async function createNewSignUp(req, res) {
     };
 
     await VolunteerSlots.updateOne(
-      { date: req.body.date },
+      { date: modified_date },
       { $push: { sign_ups: newSignUp } }
     );
 
