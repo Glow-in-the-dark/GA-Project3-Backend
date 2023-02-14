@@ -6,7 +6,7 @@ const {
 } = require("../controllers/volunteerSlots");
 
 // READ: Get slot vacancies for the month
-router.get("/availability", getAvailabilityDetails);
+router.post("/availability", getAvailabilityDetails);
 
 // CREATE:
 router.patch("/new-sign-up", createNewSignUp);

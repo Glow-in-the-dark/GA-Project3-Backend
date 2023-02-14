@@ -9,6 +9,10 @@ const VolunteerSlots = require("../models/VolunteerSlots");
 // READ: Get volunteer slot details for a specific time period
 async function getAvailabilityDetails(req, res) {
   try {
+    // Modify date
+    // const modified_date = new Date(req.body.date);
+    // modified_date.setHours(modified_date.getHours() + 8);
+
     const data = await VolunteerSlots.find({ date: req.body.date });
     const orig_availability_details = data[0].orig_slots_available;
     const sign_ups_details = data[0].sign_ups;
