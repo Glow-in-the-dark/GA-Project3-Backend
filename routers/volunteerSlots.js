@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const {} = require("../controllers/volunteerSlots");
+const {
+  getAvailabilityDetails,
+  createNewSignUp,
+} = require("../controllers/volunteerSlots");
 
 // READ: Get slot vacancies for the month
-router.put("/vacancies");
+router.get("/availability", getAvailabilityDetails);
 
 // CREATE:
-router.post("/new");
+router.patch("/new-sign-up", createNewSignUp);
 
 module.exports = router;
