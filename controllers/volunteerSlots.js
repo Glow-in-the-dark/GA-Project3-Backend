@@ -57,12 +57,12 @@ async function getAvailabilityDetails(req, res) {
 async function createNewSignUp(req, res) {
   try {
     // Modify date
-    const modified_date = new Date(req.body.date);
-    modified_date.setHours(modified_date.getHours() + 8);
+    // const modified_date = new Date(req.body.date);
+    // modified_date.setHours(modified_date.getHours() + 8);
 
     // Check if volunteer has signed up for this date and timing
     const clashingSignUp = await VolunteerSlots.findOne({
-      date: modified_date,
+      date: req.body.date,
       sign_ups: {
         $elemMatch: { timing: req.body.timing, email: req.body.email },
       },
@@ -84,7 +84,7 @@ async function createNewSignUp(req, res) {
     };
 
     await VolunteerSlots.updateOne(
-      { date: modified_date },
+      { date: req.body.date },
       { $push: { sign_ups: newSignUp } }
     );
 
