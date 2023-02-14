@@ -56,9 +56,13 @@ async function getAvailabilityDetails(req, res) {
 // CREATE: Create new record in db when volunteer signs up
 async function createNewSignUp(req, res) {
   try {
+    // Modify date
+    const filtered_date = new Date(req.body.start_date);
+    filtered_date.setHours(filtered_date.getHours() + 8);
+
     // Check if volunteer has signed up for this date and timing
     const clashingSignUp = await VolunteerSlots.findOne({
-      date: req.body.date,
+      date: filtered_date,
       sign_ups: {
         $elemMatch: { timing: req.body.timing, email: req.body.email },
       },
@@ -80,7 +84,7 @@ async function createNewSignUp(req, res) {
     };
 
     await VolunteerSlots.updateOne(
-      { date: req.body.date },
+      { date: filtered_date },
       { $push: { sign_ups: newSignUp } }
     );
 
