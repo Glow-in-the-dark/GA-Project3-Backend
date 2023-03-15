@@ -6,7 +6,7 @@ This repository is for the backend. You may find the frontend repository [HERE](
 
 <kbd>![Database ](images/backendDB.png) </kbd>
 <kbd>![Users Collection ](images/user.png) </kbd>
-<kbd>![VolunteerSlots Collection ](images/volunteerSlots.png) </kbd>
+<kbd>![VolunteerSlots Collection ](images/volunteerSlots) </kbd>
 
 ## Technologies Used
 
