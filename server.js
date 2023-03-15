@@ -19,18 +19,18 @@ app.use("/volunteer-slots", volunteerSlots);
 // Route to all user endpoints
 app.use("/users", users);
 
-// // Seed data:
+// Seed data:
 // const seed = require("./models/SeedData");
 // const VolunteerSlots = require("./models/VolunteerSlots");
 
 // app.get("/seed", async (req, res) => {
-//   // seed.forEach((item) => {
-//   //   const newItem = {
-//   //     date: item.date,
-//   //     orig_slots_available: item.orig_slots_available,
-//   //     sign_ups: item.sign_ups,
-//   //   };
-//   // });
+//   seed.forEach((item) => {
+//     const newItem = {
+//       date: item.date,
+//       orig_slots_available: item.orig_slots_available,
+//       sign_ups: item.sign_ups,
+//     };
+//   });
 //   console.log(seed);
 //   await VolunteerSlots.create(seed, (err, createdUsers) => {
 //     if (err) {
